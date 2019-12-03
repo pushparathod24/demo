@@ -1,0 +1,1536 @@
+A#Q1. Object based language differs from object oriented language as it does not support features _____ .
+1. Encapsulation
+2. Inheritance
+3. Dynamic Binding
+4. Abstraction
+5. Polymorphism
+
+A. only 3 ,4
+B. only 1,3,5
+C. 2,4,5
+D. Only 2,3
+A#Q1Ans=D
+
+A#Q2. #include <iostream>
+using namespace std;
+int main()
+{
+   int x = -1;
+   try {
+      cout << "Inside try n";
+      if (x < 0)
+      {
+         throw x;
+         cout << "After throw n";
+      }
+   }
+   catch (int x ) {
+      cout << "Exception Caught n";
+   }
+ 
+   cout << "After catch n";
+   return 0;
+}
+
+A. Inside try
+Exception Caught
+After throw 
+After catch
+
+B. Inside try
+Exception Caught
+After catch
+
+C. Inside try
+Exception Caught
+
+D. Inside try
+After throw
+After catch
+A#Q2Ans=B
+
+
+A#Q3.  Output of following program
+#include<iostream>
+using namespace std;
+class Base {};
+class Derived: public Base {};
+int main()
+{
+   Derived d;
+   try {
+       throw d;
+   }
+   catch(Base b) {
+        cout<<"Caught Base Exception";
+   }
+   catch(Derived d) {
+        cout<<"Caught Derived Exception";
+   }
+   return 0;
+}
+
+A.  Caught Derived Exception
+B.  Caught Base Exception
+C.  Compiler Error
+D. none of this
+A#Q3Ans=B
+
+
+
+ A#Q4.  #include <iostream>
+using namespace std; 
+int main()
+{
+    try
+    {
+       throw 10;
+    }
+    catch (...)
+    {
+        cout << "default exceptionn";
+    }
+    catch (int param)
+    {
+        cout << "int exceptionn";
+    }
+ 
+    return 0;
+}
+
+A. default exception
+B.  int exception
+C.  Compiler Error
+D.   none of this	
+A#Q4Ans=C
+
+
+
+ A#Q5. #include <iostream>
+using namespace std; 
+int main()
+{
+    try
+    {
+        try
+        {
+            throw 20;
+        }
+        catch (int n)
+        {
+            cout << "Inner Catchn";
+            throw;
+        }
+    }
+    catch (int x)
+    {
+        cout << "Outer Catchn";
+    }
+    return 0;
+}
+A. Outer Catch
+B.  Inner Catch
+C.  Inner Catch
+D.  Compiler Error
+A#Q5Ans=C
+
+
+A#Q6.  #include <iostream>
+using namespace std; 
+class Test {
+public:
+   Test() { cout << "Constructing an object of Test " << endl; }
+  ~Test() { cout << "Destructing an object of Test "  << endl; }
+};
+ 
+int main() {
+  try {
+    Test t1;
+    throw 10;
+  } catch(int i) {
+    cout << "Caught " << i << endl;
+  }
+}
+
+a)  Caught 10
+b)  Constructing an object of Test 
+	Caught 10
+c)  Constructing an object of Test 
+	Destructing an object of Test 
+	Caught 10
+d)  Compiler Errror
+A#Q6Ans=C
+
+
+
+A#Q7.   #include <iostream>
+using namespace std; 
+template <class T>
+class Test
+{
+private:
+    T val;
+public:
+    static int count;
+    Test() 
+     {   
+        count++;   
+    }
+};
+template<class T>
+int Test<T>::count = 0; 
+int main()
+{
+    Test<int> a;
+    Test<int> b;
+    Test<double> c;
+    cout << Test<int>::count   << endl;
+    cout << Test<double>::count << endl;
+    return 0;
+}
+
+A. 0  0    B.  1  1  C.  2   1   D. 1   0
+A#Q7Ans=C
+
+
+
+A#Q8.  Assume that an integer takes 4 bytes and there is no alignment in following classes, predict the output.
+#include<iostream>
+using namespace std;
+class base {
+    int arr[10];
+}; 
+class b1: public base { };
+class b2: public base { };
+class derived: public b1, public b2 {};
+int main(void)
+{
+  cout << sizeof(derived);
+  return 0;
+}
+A.  40     B.  80    C.   0     D.  4
+A#Q8Ans=B
+
+
+
+
+A#Q9.  #include<iostream> 
+using namespace std;
+class P {
+public:
+   void print()  { cout <<" Inside P"; }
+}; 
+class Q : public P {
+public:
+   void print() { cout <<" Inside Q"; }
+}; 
+class R: public Q { };
+int main(void)
+{
+  R r; 
+  r.print();
+  return 0;
+}
+A.  Inside P
+B.  Inside Q
+C.  Compiler Error: Ambiguous call to print()
+D.  none
+A#Q9Ans=B
+
+
+
+A#Q10.  #include<iostream>
+using namespace std;
+class Base {};
+class Derived: public Base {}; 
+int main()
+{
+    Base *bp = new Derived;
+    Derived *dp = new Base;
+}
+a)  No Compiler Error
+b)  Compiler Error in line "Base *bp = new Derived;"
+c)  Compiler Error in line#include<iostream>
+d)  Runtime Error
+A#Q10Ans=B
+
+
+
+A#Q11.  #include<iostream>
+	using namespace std;
+class Base {
+public:
+    int fun()          {    cout << "Base::fun() called";     }
+    int fun(int i)     {   cout << "Base::fun(int i) called";  }
+}; 
+class Derived: public Base  {
+public:
+    int fun()   {     cout << "Derived::fun() called";   }
+};
+int main()  {
+    Derived d;
+    d.Base::fun(5);
+    return 0;
+}
+A.  Compiler Error
+B.  Base::fun(int i) called " Derived *dp = new Base;"
+C.   run time error
+D.   none
+A#Q11Ans=B
+
+
+
+A#Q12. 
+  Output of following program?
+#include<iostream>
+using namespace std;
+class Point {
+    Point() { cout << "Constructor called"; }
+};
+int main()
+{
+   Point t1;
+   return 0;
+}
+A.   Compiler Error
+B.   Runtime Error
+C.   Constructor called	
+D.   none
+A#Q12Ans=A
+
+
+
+A#Q13.   
+#include<iostream>
+using namespace std; 
+class X 
+{
+public:
+    int x;
+};
+int main()
+{
+    X a = {10};
+    X b = a;
+    cout << a.x << " " << b.x;
+    return 0;
+}
+a)  Compiler Error
+b)  10 followed by Garbage Value
+c)  10 10
+d)  10 0	
+A#Q13Ans=C
+
+
+
+
+A#Q14.  Predict the output of following program.
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
+class Test
+{
+public:
+   Test()
+   { cout << "Constructor called"; }
+};
+int main()
+{
+    Test *t = (Test *) malloc(sizeof(Test));
+    return 0;
+}
+a)  Constructor called
+b)  Empty
+c)  Compiler Error
+d)  Runtime error
+A#Q14Ans=B
+
+
+
+A#Q15.
+  #include <iostream>
+using namespace std; 
+class Test
+{
+public:
+      Test() { cout << "Hello from Test() "; }
+} a;
+int main()
+{
+    cout << "Main Started ";
+    return 0;
+}
+a) Main Started
+b) Main Started Hello from Test()
+c) Hello from Test() Main Started
+d) Compiler Error: Global objects are not allowed
+A#Q15Ans=C
+
+
+
+A#Q16.  What will be the output of the following C code?
+        #include <stdio.h>
+        int main()
+        {
+            int i = 0;
+            int x = i++, y = ++i;
+            printf("%d % d\n", x, y);
+            return 0;
+        }
+A.  0, 2
+B.  0, 1
+C. 1, 2
+D. Undefined
+A#Q16Ans=A
+
+
+
+
+A#Q17.  What will be the output of the following C code?
+        #include <stdio.h>
+        int main()
+        {
+            int i = 10;
+            int *p = &i;
+            printf("%d\n", *p++);
+        }
+A.  10
+B.  11
+C.  Garbage value
+D.  Address of i
+A#Q17Ans=A
+
+
+
+
+A#Q18.  What will be the output of the following C code?
+        #include <stdio.h>
+        void main()
+        {
+            int x = 97;
+            int y = sizeof(x++);
+            printf("X is %d", x);
+        }
+A.  X is 97
+B.  X is 98
+C.  X is 99
+D.  Run time error
+A#Q18Ans=A
+
+
+
+
+A#Q19.  What will be the output of the following C code
+        #include <stdio.h>
+        void main()
+        {
+            int x = 4, y, z;
+            y = --x;
+            z = x--;
+            printf("%d%d%d", x,  y, z);
+        }
+A.  3 2 3
+B.  2 3 3
+C.  3 2 2
+D.  2 3 4
+A#Q19Ans=B
+
+
+
+
+A#Q20.  What will be the output of the following C code?
+        #include <stdio.h>
+        void main()
+        {
+            int x = 4;
+            int *p = &x;
+            int *k = p++;
+            int r = p - k;
+            printf("%d", r);
+        }
+a) 4
+b) 8
+c) 1
+d) Run time error
+A#Q20Ans=C
+
+
+
+
+A#Q21. What will be the output of the following C code?
+     #include <stdio.h>
+        void main()
+        {
+            int a = 5, b = -7, c = 0, d;
+            d = ++a && ++b || ++c;
+            printf("\n%d%d%d%d", a,  b, c, d);
+        }
+A.  6 -6 0 0
+B.  6 -5 0 1
+C.  -6 -6 0 1
+D.  6 -6 0 1
+A#Q21Ans=D
+
+
+
+
+A#Q22.  What will be the output of the following C code?
+        #include <stdio.h>
+        void main()
+        {
+            int a = -5;
+            int k = (a++, ++a);
+            printf("%d\n", k);
+        }
+A. -4
+B. -5
+C. 4
+D. -3
+A#Q22Ans=D
+
+
+
+
+
+A#Q23.  What is the difference between the following 2 codes?
+        #include <stdio.h> //Program 1
+        int main()
+        {
+            int d, a = 1, b = 2;
+            d =  a++ + ++b;
+            printf("%d %d %d", d, a, b);
+        }
+        #include <stdio.h> //Program 2
+        int main()
+        {
+            int d, a = 1, b = 2;
+            d =  a++ +++b;
+            printf("%d %d %d", d, a, b);
+        }
+A.  No difference as space doesn’t make any difference, values of a, b, d are same in both the case
+B.  Space does make a difference, values of a, b, d are different
+C.  Program 1 has syntax error, program 2 is not
+D.  Program 2 has syntax error, program 1 is not
+A#Q23Ans=D
+
+
+
+
+A#Q24.  What will be the output of the following C code?
+        #include <stdio.h>
+        int main()
+        {
+            int a = 1, b = 1, c;
+            c = a++ + b;
+            printf("%d, %d", a, b);
+        }
+A.  a = 1, b = 1
+B. a = 2, b = 1
+C. a = 1, b = 2
+D. a = 2, b = 2
+A#Q24Ans=B
+
+
+
+
+A#Q25.  What will be the output of the following C code?
+        #include <stdio.h>
+        int main()
+        {
+            int a = 1, b = 1, d = 1;
+            printf("%d, %d, %d", ++a + ++a+a++, a++ + ++b, ++d + d++ + a++);
+        }
+A.  15, 4, 5
+B. 9, 6, 9
+C. 9, 3, 5
+D. Undefined (Compiler Dependent)
+A#Q25Ans=D 
+
+
+
+
+A#Q26.  For which of the following, “PI++;” code will fail?
+A. #define PI 3.14
+B. char *PI = “A”;
+C. float PI = 3.14;
+D. none of the Mentioned
+A#Q26Ans=A
+
+
+
+
+A#Q27. What will be the output of the following C++ code?
+        #include <iostream>
+        using namespace std;
+        int operate (int a, int b)
+        {
+            return (a * b);
+        }
+        float operate (float a, float b)
+        {
+            return (a / b);
+        }
+        int main ()
+        {
+            int x = 5, y = 2;
+            float n = 5.0, m = 2.0;
+            cout << operate (x, y);
+            cout << operate (n, m);
+            return 0;
+        }
+A. 119
+B. 102.5
+C. 123.4
+D. 128.4
+A#Q27Ans=B
+
+
+
+
+A#Q28. What is the use of functor?
+A. It makes the object “callable” like a function
+B. It makes the class “callable” like a function
+C. It makes the attribute “callable” like a function
+D. It makes the argument “callable” like a function
+A#Q28Ans=B
+
+
+
+
+A#Q29. What will happen when the function call operator is overloaded?
+A. It will not modify the functions
+B It will modify the functions
+C. It will modify the object
+D. It will modify the operator to be interpreted
+A#Q29Ans=D
+
+
+
+
+A#Q30. What is the output of the following C++ code?
+#include <iostream>
+#include <string>
+using namespace std;
+class Box
+{
+	int capacity;
+	Box(){}
+	Box(double capacity){
+		this->capacity = capacity;
+	}
+ 
+};
+int main(int argc, char const *argv[])
+{
+	Box b1(10);
+	Box b2 = Box(14);
+	return 0;
+}
+A. Error
+B. Segmentation fault
+C. 4
+D. No output
+A#Q30Ans=A
+
+
+
+A#Q31.  What is Inheritance in C++?
+A. Wrapping of data into a single class
+B. Deriving new classes from existing classes
+C. Overloading of classes
+D. Classes with same names
+A#Q31Ans=B
+
+
+
+
+A#Q32. How many specifiers are used to derive a class?
+A. 1
+B. 2
+C. 3
+D. 4
+A#Q32Ans=C
+
+
+
+
+A#Q33. Which specifier makes all the data members and functions of base class inaccessible by the derived class?
+A. private
+B. protected
+C. public
+D. both private and protected
+A#Q33Ans=A
+
+
+
+
+A#Q34. If a class is derived privately from a base class then ______________________________
+a) no members of the base class is inherited
+b) all members are accessible by the derived class
+c) all the members are inherited by the class but are hidden and cannot be accessible
+d) no derivation of the class gives an error
+A#Q34Ans=C
+
+
+
+
+A#Q35. What is a virtual function in C++?
+a) Any member function of a class
+b) All functions that are derived from the base class
+c) All the members that are accessing base class data members
+d) All the functions which are declared in the base class and is re-defined/overridden by the derived class
+A#Q35Ans=D
+
+
+
+
+ A#Q36. Which is the correct syntax of declaring a virtual function?
+a) virtual int func();
+b) virtual int func(){};
+c) inline virtual func();
+d) inline virtual func(){};
+A#Q36Ans=A
+
+
+
+
+ A#Q37. Which statement is incorrect about virtual function.
+a) They are used to achieve runtime polymorphism
+b) They are used to hide objects
+c) Each virtual function declaration starts with the virtual keyword
+d) All of the mentioned
+A#Q37Ans=B
+
+
+
+
+A#Q38. The concept of deciding which function to invoke during runtime is called ______________________
+a) late binding
+b) dynamic linkage
+c) static binding
+d) both late binding and dynamic linkage
+A#Q38Ans=D
+
+
+
+A#Q39.  What is a pure virtual function?
+a) A virtual function defined inside the base class
+b) A virtual function that has no definition relative to the base class
+c) A virtual function that is defined inside the derived class
+d) Any function that is made virtual
+A#Q39Ans=B
+
+
+
+
+A#Q40.  What is the order of Constructors call when the object of derived class B is declared, provided class B is derived from class A?
+a) Constructor of A followed by B
+b) Constructor of B followed by A
+c) Constructor of A only
+d) Constructor of B Only
+A#Q40Ans=A
+
+
+
+
+A#Q41.  What is the order of Destructors call when the object of derived class B is declared, provided class B is derived from class A?
+a) Destructor of A followed by B
+b) Destructor of B followed by A
+c) Destructor of A only
+d) Destructor of B only
+A#Q41Ans=B
+
+
+
+
+A#Q42. Virtual functions in C++ tells the compiler to perform ______________________ on such functions.
+a) static binding
+b) late binding
+c) compile time binding
+d) no binding
+A#Q42Ans=B
+
+
+
+A#Q43.  What will be the output of the following C code?
+      #include<stdio.h>
+     int main()
+     {     
+     int a =1,b =1,c;    
+     c=a++ + b;
+     printf("%d,%d",a b);
+ }
+a)a=1,b=1
+b)a=2,b=1
+c)a=1,b=2
+d)a=2,b=2
+A#Q43Ans=B
+
+
+
+
+A#Q44.  Which of the following “PI++” code will fail?
+a)#define PI 3.14
+b)char *PI =”A”;
+c)float PI=3.14;
+d)none of the above.
+A#Q44Ans=A
+
+
+
+
+A#Q45.  Which one of the following is an application of Stack Data Structure?
+A. Managing function calls
+B. The stock span problem
+C. Arithmetic expression evaluation
+D.All of the above
+A#Q45Ans=D
+
+
+
+
+A#Q46.  Which of the following is not an inherent application of stack?
+A.Implementation of recursion
+B.Evaluation of a postfix expression
+C.Job scheduling
+D.Reverse a string
+A#Q46Ans=D
+
+
+
+A#Q47. Which of the following operations are performed more efficiently by doubly linked list than by linear linked list?
+A. Deleting a node whose location is given
+B. Searching an unsorted list for a given item
+C. Inserting a node after the node with a given location
+D. Traversing the list to process each node
+A#Q47Ans=A
+
+
+
+
+A#Q48. Which of the following “PI++” code will fail?
+A. #define PI 3.14
+B. char *PI =”A”;
+C. float PI=3.14;
+D. none of the above.
+A#Q48Ans=A
+
+
+
+
+A#Q49. What symbol is used to Left-justify within the data given field width?
+A. -(minussign)
+B.  +(plussign)
+C.  #
+D.   0
+A#Q49Ans=A
+
+
+
+
+ A#Q50. Which of the following functions allocates multiple blocks of memory, each block of thesamesize?
+a)malloc()
+b)realloc()
+c)calloc()
+d) free()
+A#Q50Ans=C
+
+
+
+
+A#Q51. What is the syntax for constant pointer to address (i.e., fixed pointer address)?
+a) const <type> * <name>
+b) <type> * const <name>
+c) <type> const * <name>
+d) none of the mentioned
+A#Q51Ans=B
+
+
+
+
+
+A#Q52.  For automatic objects, constructors and destructors are called each time the objects
+A.enter and leave scope
+B.inherit parent class
+C.are constructed
+D.are destroyed
+A#Q52Ans=A
+
+
+
+
+A#Q53.  union that has no constructor can be initialized with another union of __________ type.
+A. different
+B. same
+C. virtual
+D. class
+A#Q53Ans=B
+ 	
+
+
+
+A#Q54.  Which of the following statement is correct about the references?
+A. A reference must always be initialized within functions.
+B. A reference must always be initialized outside all functions.
+C. A reference must always be initialized.
+D. Both A and C.
+A#Q54Ans=C
+
+
+
+
+A#Q55.  Which of the following statement is correct?
+A. A reference is a constant pointer.
+B. A reference is not a constant pointer.
+C. An array of references is acceptable.
+D. It is possible to create a reference to a reference.
+A#Q55Ans=A
+
+
+
+A#Q56. In the following code, the P2 is Integer Pointer or Integer?
+ 
+  typedef int *ptr;
+  ptr p1, p2;
+
+A. Integer
+B. Integer pointer
+C. Error in declaration
+D. None of above
+A#Q56Ans=B
+
+
+
+
+A#Q57.  What are the different types of real data type in C ?
+A. float, double
+B. short int, double, long int
+C. float, double, long double
+D. double, long int, float
+A#Q56Ans=C
+
+
+
+
+ A#Q58.  The code of statements which may cause abnormal termination of the program should be written under_________ block.
+a. Try
+b. catch
+c. Finally
+d. None of these
+A#Q58Ans=C
+
+
+
+ A#Q59.  Object based language differs from object oriented language as it does not support features _____ .
+1. Encapsulation
+2. Inheritance
+3. Dynamic Binding
+4. Abstraction
+5. Polymorphism
+
+a. only 3 ,4
+b. only 1,3,5
+c. 2,4,5
+d. Only 2,3
+A#Q59Ans=C
+
+
+
+
+A#Q60.  Which of the following concepts means adding new components to a program as it runs?
+A.	Data hiding
+B.	Dynamic typing
+C.	Dynamic binding
+D.	Dynamic loading
+A#Q60Ans=D
+
+
+
+A#Q61. Which of the following statement is correct?
+A.	A constructor is called at the time of declaration of an object.
+B.	A constructor is called at the time of use of an object.
+C.	A constructor is called at the time of declaration of a class.
+D.	A constructor is called at the time of use of a class.
+A#Q61Ans=B
+
+
+ 	
+A#Q62. Which of the following correctly describes overloading of functions?
+A.	Virtual polymorphism
+B.	Transient polymorphism
+C.	Ad-hoc polymorphism
+D.	Pseudo polymorphism
+A#Q62Ans=C
+
+
+
+
+A#Q63.  Which of the following approach is adapted by C++?
+A.	Top-down
+B.	Bottom-up
+C.	Right-left
+D.	Left-right
+A#Q63Ans=B
+
+
+
+A#Q63.  Which of the following is correct about function overloading?
+A.	The types of arguments are different.
+B.	The order of argument is different.
+C.	The number of argument is same.
+D.	Both A and B.	
+A#Q63Ans=B
+
+
+
+
+A#Q64.  Which of the following is correct about class and structure?
+A.	class can have member functions while structure cannot.
+B.	class data members are public by default while that of structure are private.
+C.	Pointer to structure or classes cannot be declared.
+D.	class data members are private by default while that of structure are public by default.
+A#Q64Ans=D
+
+
+
+
+A#Q65.  Which of the following concepts means wrapping up of data and functions together?
+A.	Abstraction
+B.	Encapsulation
+C.	Inheritance
+D.	Polymorphism
+A#Q65Ans=B
+
+
+
+
+A#Q66.  Which of the following concepts means waiting until runtime to determine which function to call?
+A.	Data hiding
+B.	Dynamic casting
+C.	Dynamic binding
+D.	Dynamic loading
+A#Q66Ans=C
+
+
+
+
+A#Q67. How "Late binding" is implemented in C++?
+A.	Using C++ tables
+B.	Using Virtual tables
+C.	Using Indexed virtual tables
+D.	Using polymorphic tables
+A#Q67Ans=B
+
+
+
+
+A#Q68. Which of the following operator is overloaded for object cout?
+A.	>>
+B.	<<
+C.	+
+D.	=
+A#Q68Ans=B
+
+
+
+A#Q69. Which of the following is the correct class of the object cout?
+A.	iostream
+B.	istream
+C.	ostream
+D.	ifstream
+A#Q69Ans=C
+
+
+
+
+A#Q70. Which of the following cannot be used with the keyword virtual?
+A.	class
+B.	member functions
+C.	constructor
+D.	destructor
+A#Q70Ans=C
+
+
+
+
+A#Q71.  Which of the following functions are performed by a constructor?
+A.	Construct a new class
+B.	Construct a new object
+C.	Construct a new function
+D.	Initialize objects
+A#Q71Ans=D
+
+
+
+A#Q72. Which of the following problem causes an exception?
+
+A.	Missing semicolon in statement in main().
+B.	A problem in calling function.
+C.	A syntax error.
+D.	A run-time error.
+A#Q72Ans=D
+
+
+
+
+A#Q73. Which one of the following options is correct about the statement given below? The compiler checks the type of reference in the object and not the type of object.
+A.	Inheritance
+B.	Polymorphism
+C.	Abstraction
+D.	Encapsulation
+A#Q73Ans=B
+
+
+
+A#Q74.  Which keyword is used to handle the expection?
+A. try
+B. throw
+C. catch
+D. handler
+A#Q74Ans=C
+
+
+
+
+A#Q75.  How many template parameters are allowed in template classes?
+A. 1
+B. 2
+C. 3
+D. one or more
+A#Q75Ans=D
+
+
+
+
+A#Q76.  What is the output of the following C++ code?
+	#include <iostream>
+	#include <string>
+	using namespace std;
+	class Box
+	{
+		int capacity;
+	    public:
+		Box(int cap){
+			capacity = cap;
+		}
+	 
+		friend void show();
+	};
+	void show()
+	{	
+		Box b(10);
+		cout<<"Value of capacity is: "<<b.capacity<<endl;
+	}
+	 
+	int main(int argc, char const *argv[])
+	{
+		show();
+		return 0;
+	}
+
+A. Value of capacity is: 10
+B. Value of capacity is: 100
+C. Error
+D. Segmentation fault 
+A#Q76Ans=A
+
+
+
+
+A#Q77.  What is the use of function call operator?
+A. overloading the methods
+B. overloading the objects
+C. overloading the parameters
+D. overloading the string
+A#Q77Ans=B
+
+
+
+
+A#Q78.  What will happen when the function call operator is overloaded?
+A. It will not modify the functions
+B. It will modify the functions
+C. It will modify the object
+D. It will modify the operator to be interpreted
+A#Q78Ans=D
+
+
+
+
+A#Q79. What is the default calling convention for a compiler in c++?
+A. __cdecl
+B. __stdcall
+C. __pascal
+D. __fastcall
+A#Q79Ans=A
+
+
+
+A#Q80. What will be the output of the following C++ code?
+        #include <iostream>
+        using namespace std;
+        void func(int x)
+        {
+            cout << x ;
+        }
+        int main()
+        {
+            void (*n)(int);
+            n = &func;
+            (*n)( 2 );
+            n( 2 );
+            return 0;
+        }
+A. 2
+B. 20
+C. 21
+D. 22
+A#Q80Ans=D
+
+
+
+A#Q81.  What will be the output of the following C++ code?
+        #include <iostream>
+        using namespace std;
+        ostream & operator<<(ostream & i, int n)
+        {
+            return i;
+        }
+        int main()
+        {
+            cout << 5 << endl;
+            cin.get();
+            return 0;
+        }
+A. 5
+B. 6
+C. error
+D. runtime error
+A#Q81Ans=C
+
+
+
+A#Q82. Which of the followings is/are automatically added to every class, if we do not write our own.
+A.Copy Constructor
+B.Assignment Operator
+C.A constructor without any parameter
+D.All of the above
+A#Q82Ans=D
+
+
+
+
+A#Q83.  When a copy constructor may be called?
+A.When an object of the class is returned by value.
+B.When an object of the class is passed (to a function) by value as an argument.
+C.When an object is constructed based on another object of the same class
+D.When compiler generates a temporary object.
+E.All of the above
+A#Q83Ans=E
+
+
+
+A#Q84. Output of following program?
+#include<iostream>
+using namespace std;
+class Point {
+    Point() { cout << "Constructor called"; }
+}; 
+int main()
+{
+   Point t1;
+   return 0;
+}
+A.Compiler Error
+B.Runtime Error
+C.Constructor called
+A#Q84Ans=A
+
+
+
+A#Q85. Output of following program?
+#include<iostream>
+using namespace std; 
+class Point {
+public:
+    Point() { cout << "Normal Constructor calledn"; }
+    Point(const Point &t) { cout << "Copy constructor calledn"; }
+};
+int main()
+{
+   Point *t1, *t2;
+   t1 = new Point();
+   t2 = new Point(*t1);
+   Point t3 = *t1;
+   Point t4;
+   t4 = t3;
+   return 0;
+}
+A.Normal Constructor called
+  Normal Constructor called
+  Normal Constructor called
+  Copy Constructor called
+  Copy Constructor called
+  Normal Constructor called
+  Copy Constructor called
+
+B.Normal Constructor called
+  Copy Constructor called
+  Copy Constructor called
+  Normal Constructor called
+  Copy Constructor called
+
+C.Normal Constructor called
+  Copy Constructor called
+  Copy Constructor called
+  Normal Constructor called
+A#Q85Ans=A
+
+
+
+A#Q86. #include<iostream>
+using namespace std; 
+class X 
+{
+public:
+    int x;
+};
+int main()
+{
+    X a = {10};
+    X b = a;
+    cout << a.x << " " << b.x;
+    return 0;
+}
+A.Compiler Error
+B.10 followed by Garbage Value
+C.10 10
+D.10 0
+A#Q86Ans=C
+
+
+
+A#Q87. What is the output of following program?
+#include <iostream>
+using namespace std;
+class Point
+{
+    int x, y;
+public:
+   Point(const Point &p) { x = p.x; y = p.y; }
+   int getX() { return x; }
+   int getY() { return y; }
+};
+int main()
+{
+    Point p1;
+    Point p2 = p1;
+    cout << "x = " << p2.getX() << " y = " << p2.getY();
+    return 0;
+}
+A.x = garbage value y = garbage value
+B.x = 0 y = 0
+C.Compiler Error
+A#Q87Ans=C
+
+
+
+A#Q88. Predict the output of following program.
+#include<iostream>
+#include<stdlib.h>
+using namespace std; 
+class Test
+{
+public:
+   Test()
+   { cout << "Constructor called"; }
+};
+int main()
+{
+    Test *t = (Test *) malloc(sizeof(Test));
+    return 0;
+}
+A.Constructor called
+B.Empty
+C.Compiler Error
+D.Runtime error
+A#Q88Ans=B
+
+
+A#Q89. We must use initializer list in a constructor when
+A.There is a reference variable in class
+B.There is a constant variable in class
+C.There is an object of another class. And the other class doesn't have default constructor.
+D.All of the above
+A#Q89Ans=D
+
+
+
+
+A#Q90. Which of the following is true about virtual functions in C++.
+A.Virtual functions are functions that can be overridden in derived class with the same signature.
+B.Virtual functions enable run-time polymorphism in a inheritance hierarchy.
+C.If a function is 'virtual' in the base class, the most-derived class's implementation of the function is called according 
+to the actual type of the object referred to, regardless of the declared type of the pointer or reference. In non-virtual 
+functions, the functions are called according to the type of reference or pointer.
+D.All of the above
+A#Q90Ans=D
+
+
+
+A#Q91. Predict output of the following program
+#include<iostream>
+using namespace std;
+class Base
+{
+public:
+    virtual void show() { cout<<" In Base n"; }
+};
+class Derived: public Base
+{
+public:
+    void show() { cout<<"In Derived n"; }
+};
+int main(void)
+{
+    Base *bp = new Derived;
+    bp->show();
+ 
+    Base &br = *bp;
+    br.show();
+ 
+    return 0;
+}
+A.In Base 
+  In Base
+ 
+B.In Base 
+  In Derived
+
+C.In Derived
+  In Derived
+
+D.In Derived
+  In Base 
+A#Q91Ans=C
+
+
+
+
+A#Q92. Which of the following is true about pure virtual functions? 
+1) Their implementation is not provided in a class where they are declared. 
+2) If a class has a pure virtual function, then the class becomes abstract class and an instance of this class cannot be created.
+A.Both 1 and 2
+B.Only 1
+C.Only 2
+D.Neither 1 nor 2
+A#Q92Ans=C
+
+
+
+A#Q93. What is the output of the following?
+#include<iostream>
+using namespace std;
+class Base
+{
+public:
+    virtual void show() = 0;
+};
+ 
+class Derived: public Base
+{
+public:
+    void show() { cout<<"In Derived n"; }
+};
+ 
+int main(void)
+{
+    Derived d;
+    Base &br = d;
+    br.show();
+    return 0;
+}
+A.Compiler Error in line "Base &br = d;"
+B.Empty Output
+C.In Derived
+A#Q93Ans=C
+
+
+
+
+A#Q94. What is the output of the following?
+#include<iostream>
+using namespace std;
+class Base  {
+public:
+    Base()    { cout<<"Constructor: Base"<<endl; }
+    virtual ~Base()   { cout<<"Destructor : Base"<<endl; }
+};
+class Derived: public Base {
+public:
+    Derived()   { cout<<"Constructor: Derived"<<endl; }
+    ~Derived()  { cout<<"Destructor : Derived"<<endl; }
+};
+int main()  {
+    Base *Var = new Derived();
+    delete Var;
+    return 0;
+}
+A.Constructor: Base
+  Constructor: Derived
+  Destructor : Derived
+  Destructor : Base
+
+B.Constructor: Base
+  Constructor: Derived
+  Destructor : Base
+
+C.Constructor: Base
+  Constructor: Derived
+  Destructor : Derived
+
+D.Constructor: Derived
+  Destructor : Derived
+A#Q94Ans=A
+
+
+
+A#Q95. What is the output of the following?
+#include <iostream>
+using namespace std; 
+class A
+{
+public:
+    virtual void fun() { cout << "A::fun() "; }
+};  
+class B: public A
+{
+public:
+   void fun() { cout << "B::fun() "; }
+}; 
+class C: public B
+{
+public:
+   void fun() { cout << "C::fun() "; }
+}; 
+int main()
+{
+    B *bp = new C;
+    bp->fun();
+    return 0;
+}
+A.A::fun()
+B.B::fun()
+C.C::fun()
+A#Q95Ans=C
+
+
+
+
+A#Q96. How can we restrict dynamic allocation of objects of a class using new?
+A.By overloading new operator
+B.By making an empty private new operator.
+C.By making an empty private new and new[] operators
+D.By overloading new operator and new[] operators
+A#Q96Ans=C
+
